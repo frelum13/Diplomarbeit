@@ -1,2 +1,6 @@
 http://cs.lmu.edu/~ray/notes/javanetexamples/
 https://blog.axxg.de/java-aes-verschluesselung-mit-beispiel/
+http://openbook.rheinwerk-verlag.de/javainsel9/javainsel_21_007.htm
+http://www.java-forum.org/thema/log-datei-auslesen.65984/
+http://openbook.rheinwerk-verlag.de/java7/1507_20_001.html
+http://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html
