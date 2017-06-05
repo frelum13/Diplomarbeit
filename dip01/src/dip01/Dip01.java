@@ -8,8 +8,10 @@ package dip01;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import javax.swing.JOptionPane;
 /**
@@ -26,11 +28,16 @@ public class Dip01
           throws IOException
   {
     String serverAdress = JOptionPane.showInputDialog("IP");
-    InetAddress address = InetAddress.getByName(serverAdress);
-    Socket s = new Socket(address, 5555);
-    BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-    String answer = input.readLine();
-    JOptionPane.showMessageDialog(null, answer);
+    Socket s = new Socket();
+    s.connect(new InetSocketAddress(serverAdress, 9090), 2000);
+    s.setSoTimeout(2000);
+    
+    //BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+    //String answer = input.readLine();
+    PrintWriter writer = new PrintWriter(s.getOutputStream(),true);
+    writer.println("Lukas Laptop");
+ 
+    //JOptionPane.showMessageDialog(null, answer);
     System.exit(0);
     
   }
