@@ -27,7 +27,7 @@ public class Dip01
   public static void main (String[] args)
           throws IOException
   {
-    String serverAdress = JOptionPane.showInputDialog("IP");
+    String serverAdress = "192.168.0.122";
     Socket s = new Socket();
     s.connect(new InetSocketAddress(serverAdress, 9090), 2000);
     s.setSoTimeout(2000);
