@@ -19,29 +19,7 @@ public class Server
   {
     this.port = port;
   }
-  
-//  public void start () throws IOException {
-//    final ServerSocket serverSocket = new ServerSocket(port);
-//    final Socket socket = serverSocket.accept();
-//    socket.setSoTimeout(0);
-//    System.out.println("Client connected " + socket);
-//    final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//    final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//    try
-//    {
-//      w.write("Hallo Lukas\n");
-//      w.flush();
-//      String msg = r.readLine();
-//    }
-//    finally
-//    {
-//      socket.close();
-//      serverSocket.close();
-//      System.out.println("socket closed");
-//    }
-//    
-//  }
-  
+    
 public void start() throws IOException
   {
     ServerSocket serverSocket = new ServerSocket(port);

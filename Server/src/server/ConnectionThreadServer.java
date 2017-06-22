@@ -34,10 +34,11 @@ public class ConnectionThreadServer implements Runnable
         try{
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
-            w.write("Hallo Lukas\n");
+            w.write("OK");
             w.flush();
             String msg = r.readLine();
             System.out.format("%s",msg);
+             
         }
         catch (IOException ex) {
             Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
