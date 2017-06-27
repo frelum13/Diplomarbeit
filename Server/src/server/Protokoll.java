@@ -13,16 +13,7 @@ public class Protokoll {
     
     public static byte [] createRequestReadRegister(boolean ok)
   {
-//    if (devAddr < 0 || devAddr > 255)
-//      throw new IllegalArgumentException("invalid device address");
-//    
-//    if (addr < 0 || addr > 0x0100)
-//      throw new IllegalArgumentException("invalid register address");
-//    
-//    if (quantity < 0 || quantity > 0x7f)
-//      throw new IllegalArgumentException("invalid quantity");
-    
-    
+
     final StringBuilder sb = new StringBuilder();
         if(ok == true)
             sb.append(200);

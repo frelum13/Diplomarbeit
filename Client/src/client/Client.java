@@ -37,7 +37,7 @@ public class Client
       String msg = r.readLine();
       System.out.println("Message from server: " + msg);
     }
-    catch (Exception ex) 
+    catch (IOException ex) 
     {
       System.out.println("Fehler aufgetreten");
       ex.printStackTrace(System.out);
