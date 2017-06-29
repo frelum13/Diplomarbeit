@@ -28,11 +28,20 @@ public class Client
     final Socket socket = new Socket();
     try
     {
+      String write = "Lukas";  
+        
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);
       final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-      w.write("Lukas Laptop\n");
+      
+      StringBuilder sb = new StringBuilder();
+      
+      sb.append(write);
+      sb.append(LRCuebpruefen(write));
+      sb.append("\n");
+      
+      w.write(sb.toString());
       w.flush();
       String msg = r.readLine();
       System.out.println("Message from server: " + msg);
@@ -49,6 +58,28 @@ public class Client
     }
     
   }
+  
+  public String LRCuebpruefen(String data)
+    {
+        byte [] ba = data.getBytes();
+        int sum = 0;
+        for (int i=1; i<ba.length; i++) 
+        {
+          sum += sum;
+          if (sum > 255) 
+            sum  -= 256;
+        }
+        sum = 255 - sum;
+        sum++;
+        if (sum > 255) 
+          sum  -= 256;
+        int value = sum;
+        
+        String format = String.format("%02X", sum);
+        
+        return format;
+        
+    }
   
   public static void main (String[] args) throws IOException
   {

@@ -27,19 +27,7 @@ public class Protokoll {
   
   private static void addLRC (StringBuilder sb) 
   {
-    byte [] ba = sb.toString().getBytes();
-    int sum = 0;
-    for (int i=1; i<ba.length; i++) {
-      sum += sum;
-      if (sum > 255) 
-        sum  -= 256;
-    }
-    sum = 255 - sum;
-    sum++;
-    if (sum > 255) 
-      sum  -= 256;
-    int value = sum;
-    sb.append(String.format("%02X", sum));
+   
   }
   
   private Protokoll () 
