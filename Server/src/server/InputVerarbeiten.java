@@ -15,6 +15,8 @@ public class InputVerarbeiten {
 
     public InputVerarbeiten(String string) {
         this.string = string;
+        
+        input();
     }
     
      public boolean LRCuebpruefen(String lrc,String data)
@@ -78,9 +80,13 @@ public class InputVerarbeiten {
         }
     }
     
+<<<<<<< HEAD
     private static void ausfuehren()
     {
         new InputVerarbeiten();
     }
    
+=======
+    
+>>>>>>> 7b476b8a23e5d005ee2945897fb547f3abdff9c1
 }

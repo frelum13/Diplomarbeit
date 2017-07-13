@@ -28,7 +28,7 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      String write = "Lukas";  
+      String write = "Hallo Ich bin es";  
         
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);
@@ -74,6 +74,8 @@ public class Client
         if (sum > 255) 
           sum  -= 256;
         int value = sum;
+        
+        System.out.format("%02X",sum);
         
         String format = String.format("%02X", sum);
         
