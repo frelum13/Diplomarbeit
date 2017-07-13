@@ -40,7 +40,7 @@ public class InputVerarbeiten {
     }
     
     
-    private void input()
+    private void input(String msg)
     {
         final int stringlength = string.length();
         String lrc = string.substring(stringlength-2);
@@ -56,6 +56,23 @@ public class InputVerarbeiten {
         {
             switch(data)
             {
+                case "get":
+                    
+                break;
+                case "send":
+                break;
+                case "wateron":
+                break;
+                case "wateroff":
+                break;
+                case "stop":
+                break;
+                case "new":
+                break;
+                case "delete":
+                break;
+                case "toedit":
+                break;
                 
             }
         }
@@ -63,7 +80,7 @@ public class InputVerarbeiten {
     
     private static void ausfuehren()
     {
-        new InputVerarbeiten().input();
+        new InputVerarbeiten();
     }
    
 }
