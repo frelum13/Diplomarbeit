@@ -27,12 +27,11 @@ public class ConnectionThreadServer implements Runnable
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
             String msg = r.readLine();
             System.out.format("%s" , msg);
-<<<<<<< HEAD
-            new InputVerarbeiten(msg).
-=======
+
             new InputVerarbeiten(msg);
->>>>>>> 7b476b8a23e5d005ee2945897fb547f3abdff9c1
-            
+
+            new InputVerarbeiten(msg);
+          
             w.write("OK");
             w.flush();
             
