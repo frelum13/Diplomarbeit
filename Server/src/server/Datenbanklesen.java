@@ -16,10 +16,19 @@ import java.util.Properties;
  *
  * @author marinaspari
  */
-public class Datenbank
+public class Datenbanklesen
 {
 
-    public static void main(String[] args)
+    private final String data;
+
+    public Datenbanklesen(String data) {
+        this.data = data;
+        
+        lesen();
+    }    
+    
+    
+    private void lesen()
     {
         final String hostname = "192.168.0.6";
         final String port = "3306";
@@ -44,10 +53,9 @@ public class Datenbank
             
             ResultSet myRs = st.executeQuery(sql);
             
-            while(myRs.next())
-            {
-                System.out.println(myRs.getString("name") + " " +myRs.getString("age"));
-            }
+            int colum = myRs.getMetaData().getColumnCount();
+            
+            System.out.println(myRs.getMetaData().getColumnLabel(2));
 
             conn.close();
         } catch (SQLException | ClassNotFoundException ex)
@@ -57,4 +65,3 @@ public class Datenbank
 
     }
 }
-

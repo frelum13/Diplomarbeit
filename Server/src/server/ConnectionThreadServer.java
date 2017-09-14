@@ -23,14 +23,16 @@ public class ConnectionThreadServer implements Runnable
     public void run() {
     
         try{
+            
+            System.out.println("Im connection Thread");
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
             String msg = r.readLine();
             System.out.format("%s" , msg);
 
-            new InputVerarbeiten(msg);
+            //new InputVerarbeiten(msg);
 
-            new InputVerarbeiten(msg);
+            InputVerarbeiten.input(msg);
           
             w.write("OK");
             w.flush();

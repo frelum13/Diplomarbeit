@@ -28,7 +28,7 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      String write = "Hallo Ich bin es";  
+      String write = "new";  
         
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);
@@ -38,7 +38,6 @@ public class Client
       StringBuilder sb = new StringBuilder();
       
       sb.append(write);
-      sb.append(LRCuebpruefen(write));
       sb.append("\n");
       
       w.write(sb.toString());

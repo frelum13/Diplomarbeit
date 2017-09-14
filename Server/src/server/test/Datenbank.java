@@ -11,7 +11,7 @@ package server.test;
  */
 
 import java.sql.*;
-import sun.security.pkcs11.Secmod;
+
 
 
 
@@ -23,27 +23,25 @@ public class Datenbank {
     
     public static void main(String[] args) {
         
-        final String hostname = "LFreyler";
+        final String hostname = "localhost";
         final String port = "3306";
         final String dbname = "demo";
         final String user = "root";
         final String password = "Lukas";
         
-        System.out.println("!");
+        
         try {
-            System.out.println("!");
-            Connection myCon = DriverManager.getConnection("jdbc:mysql://" + hostname + ":" + port + "/" + dbname, user , password);   
-            System.out.println("4");
-            Statement myStmt = myCon.createStatement();
-            ResultSet myRs = myStmt.executeQuery("select * from employes");
-            System.out.println("!");
-            while(myRs.next())
-            {
-                System.out.println("!");
-                System.out.println(myRs.getString("firstname") + myRs.getString("secondname"));
+            try(Connection myCon = DriverManager.getConnection("jdbc:mysql://" + hostname + ":" + port + "/" + dbname + "?useSSL=false", user , password)) {
+                Statement myStmt = myCon.createStatement();
+                String sql ="insert into employes" + "(id,firstname,secondname,email)"+ "values ('2','Marina','Spari','test@test.at')";
+                myStmt.executeUpdate(sql);
+                ResultSet myRs = myStmt.executeQuery("select * from employes");
+                while(myRs.next())
+                {
+                    System.out.println(myRs.getString("firstname") + " " + myRs.getString("secondname"));
+                }
             }
-            
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
