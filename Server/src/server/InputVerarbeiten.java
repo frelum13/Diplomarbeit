@@ -11,13 +11,11 @@ package server;
  */
 public class InputVerarbeiten {
     
-    private final String string;
 
-    public InputVerarbeiten(String string) {
-        this.string = string;
-        
-        input();
-    }
+    
+   
+
+   
     
      public boolean LRCuebpruefen(String lrc,String data)
     {
@@ -42,25 +40,30 @@ public class InputVerarbeiten {
     }
     
     
-    private void input(String msg)
+    static void input(String msg)
     {
-        final int stringlength = string.length();
-        String lrc = string.substring(stringlength-2);
-        String data = string.substring(0, stringlength-2);
+//        final int stringlength = string.length();
+//        String lrc = string.substring(stringlength-2);
+//        String data = string.substring(0, stringlength-2);
+//        
+//        
+//        
+//        boolean vergleich = LRCuebpruefen(lrc,data);
+//        
+//        System.out.println(vergleich);
+//        
+//        if(vergleich == true)
+//  
         
-        
-        
-        boolean vergleich = LRCuebpruefen(lrc,data);
-        
-        System.out.println(vergleich);
-        
-        if(vergleich == true)
-        {
-            switch(data)
+        System.out.println("In Input verarbeiten");
+            switch(msg)
             {
                 case "get":
                 break;
                 case "send":
+                    
+                    //new Datenbanklesen(name).start;
+                    
                 break;
                 case "wateron":
                 break;
@@ -69,19 +72,23 @@ public class InputVerarbeiten {
                 case "stop":
                 break;
                 case "new":
+                    Datenbankschreiben.schreiben();
                 break;
                 case "delete":
+                    
+                    //new Datenbankloeschen(name).start;
+                    
                 break;
                 case "toedit":
+                    
+                    //new Datenbanklesen(name).start;
+                    
                 break;
                 
             }
-        }
+        
     }
     
 
-    private static void ausfuehren()
-    {
-        new InputVerarbeiten();
-    }
+   
 }
