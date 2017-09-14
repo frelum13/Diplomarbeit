@@ -59,6 +59,7 @@ public class InputVerarbeiten {
             switch(data)
             {
                 case "get":
+                    
                 break;
                 case "send":
                 break;
