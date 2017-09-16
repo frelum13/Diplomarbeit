@@ -5,18 +5,23 @@
  */
 package server;
 
+
+
 /**
  *
  * @author Lukas
  */
 public class Protocol {
-    
+      
 
     static void input(String msg)
     {
+        Stringsplit split = new Stringsplit(msg, ";");
+        
+        String[] str = split.getStr();
        
         System.out.println("In Input verarbeiten");
-            switch(msg)
+            switch(str[0])
             {
                 case "get":
                     
@@ -27,15 +32,8 @@ public class Protocol {
                     
                 break;
                 case "water":
-                    String data = "";
                     
-//                    if(data = "0")
-//                        
-//                    else if(data = ")
-//                            
-//                        else
-//                            
-//                            //error
+                    System.out.format("%s\n",str[1]);
                     
                 break;
                 case "stop":
@@ -53,6 +51,17 @@ public class Protocol {
                     //new Datenbanklesen(name).start;
                     
                 break;
+                case "login":
+                      Stringsplit splitten = new Stringsplit(str[1], ",");
+                      String[] login = splitten.getStr();
+                      
+                      for(int i = 0; i<=login.length;i++)
+                          System.out.format("%s\n",login[i]);
+                      
+                      Loginueberpruefen.ueberpruefen(login[0]);
+                break;
+                default:
+                    System.out.println("Falsche Anweisung");
                 
             }
         

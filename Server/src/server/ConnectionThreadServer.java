@@ -28,9 +28,7 @@ public class ConnectionThreadServer implements Runnable
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
             String msg = r.readLine();
-            System.out.format("%s" , msg);
-
-            //new InputVerarbeiten(msg);
+            System.out.format("%s\n", msg);
 
             Protocol.input(msg);
           

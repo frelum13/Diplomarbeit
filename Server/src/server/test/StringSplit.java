@@ -21,5 +21,9 @@ public class StringSplit {
             System.out.format("%s\n",split[i]);
         
     }
+
+    public StringSplit(String msg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

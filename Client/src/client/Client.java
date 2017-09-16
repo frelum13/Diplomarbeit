@@ -28,7 +28,7 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      String write = "new";  
+      String write = "login;Lukas,Lukas123";  
         
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);
@@ -58,33 +58,8 @@ public class Client
     
   }
   
-  public String LRCuebpruefen(String data)
-    {
-        byte [] ba = data.getBytes();
-        int sum = 0;
-        for (int i=1; i<ba.length; i++) 
-        {
-          sum += sum;
-          if (sum > 255) 
-            sum  -= 256;
-        }
-        sum = 255 - sum;
-        sum++;
-        if (sum > 255) 
-          sum  -= 256;
-        int value = sum;
-        
-        System.out.format("%02X",sum);
-        
-        String format = String.format("%02X", sum);
-        
-        return format;
-        
-    }
-  
   public static void main (String[] args) throws IOException
   {
-    //new Client("127.0.0.1", 8080).start();
     new Client("127.0.0.1", 1111).start();
   }
 }
