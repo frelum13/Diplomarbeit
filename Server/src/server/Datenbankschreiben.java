@@ -22,7 +22,7 @@ public class Datenbankschreiben {
     static void schreiben()
     {
         
-        final String hostname = "192.168.0.6";
+        final String hostname = "109.73.158.173";
         final String port = "3306";
         final String dbname = "horse";
         final String user = "root";
@@ -34,7 +34,7 @@ public class Datenbankschreiben {
             {
                 System.out.println("Mit Datenbank verbunden");
                 Statement myStmt = myCon.createStatement();
-                String sql ="insert into horses" + "(id,name,age)"+ "values ('2','Marina','22')";
+                String sql ="insert into horses" + "(id,name,age)"+ "values ('5','Mörth','37')";
                 myStmt.executeUpdate(sql);
                 
             }

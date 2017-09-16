@@ -9,52 +9,12 @@ package server;
  *
  * @author Lukas
  */
-public class InputVerarbeiten {
+public class Protocol {
     
 
-    
-   
-
-   
-    
-     public boolean LRCuebpruefen(String lrc,String data)
-    {
-        byte [] ba = data.getBytes();
-        int sum = 0;
-        for (int i=1; i<ba.length; i++) 
-        {
-          sum += sum;
-          if (sum > 255) 
-            sum  -= 256;
-        }
-        sum = 255 - sum;
-        sum++;
-        if (sum > 255) 
-          sum  -= 256;
-        int value = sum;
-        
-        String format = String.format("%02X", sum);
-        
-        return format == null ? lrc == null : format.equals(lrc);
-        
-    }
-    
-    
     static void input(String msg)
     {
-//        final int stringlength = string.length();
-//        String lrc = string.substring(stringlength-2);
-//        String data = string.substring(0, stringlength-2);
-//        
-//        
-//        
-//        boolean vergleich = LRCuebpruefen(lrc,data);
-//        
-//        System.out.println(vergleich);
-//        
-//        if(vergleich == true)
-//  
-        
+       
         System.out.println("In Input verarbeiten");
             switch(msg)
             {
@@ -65,9 +25,17 @@ public class InputVerarbeiten {
                     //new Datenbanklesen(name).start;
                     
                 break;
-                case "wateron":
-                break;
-                case "wateroff":
+                case "water":
+                    String data = "";
+                    
+//                    if(data = "0")
+//                        
+//                    else if(data = ")
+//                            
+//                        else
+//                            
+//                            //error
+                    
                 break;
                 case "stop":
                 break;

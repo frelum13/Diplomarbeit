@@ -32,7 +32,7 @@ public class ConnectionThreadServer implements Runnable
 
             //new InputVerarbeiten(msg);
 
-            InputVerarbeiten.input(msg);
+            Protocol.input(msg);
           
             w.write("OK");
             w.flush();
