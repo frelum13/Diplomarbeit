@@ -14,7 +14,7 @@ import java.util.Properties;
  *
  * @author Lukas
  */
-public class LoginConection {
+public class Connect {
     
     
         private final String hostname = "109.73.158.173";
@@ -24,7 +24,7 @@ public class LoginConection {
         private final String password = "Campus02";
         private Connection conn;
 
-        public LoginConection(String dbname) {
+        public Connect(String dbname) {
             this.dbname = dbname;
             
             conection();

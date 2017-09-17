@@ -23,7 +23,7 @@ public class Datenbanklesen
     {
         try
         {
-            LoginConection connect = new LoginConection("horse");
+            Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
             
             Statement st = conn.createStatement();

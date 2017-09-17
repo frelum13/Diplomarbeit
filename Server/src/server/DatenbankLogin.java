@@ -12,7 +12,7 @@ public class DatenbankLogin {
     {
         try
         {
-            LoginConection connect = new LoginConection("login");
+            Connect connect = new Connect("login");
             Connection conn = connect.getConn(); 
             Statement st = conn.createStatement();
             

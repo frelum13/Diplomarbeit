@@ -23,13 +23,13 @@ public class Loginueberpruefen {
         {
             System.out.println("Loginüberprüfen: vor dem connecten");
             
-            LoginConection connect = new LoginConection("horse");
+            Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
             
             System.out.println("Loginüberprüfen: Mit Datenbank verbunden");
             
             Statement st = conn.createStatement();
-            String sql = ("SELECT * FROM tabellenName WHERE spaltenName = wert;");
+            String sql = ("SELECT * FROM login WHERE firstname = " + "'" + name + "'");
             
             ResultSet myRs = st.executeQuery(sql);
            

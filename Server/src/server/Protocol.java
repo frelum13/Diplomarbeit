@@ -55,7 +55,7 @@ public class Protocol {
                       Stringsplit splitten = new Stringsplit(str[1], ",");
                       String[] login = splitten.getStr();
                       
-                      for(int i = 0; i<=login.length;i++)
+                      for(int i = 0; i<login.length;i++)
                           System.out.format("%s\n",login[i]);
                       
                       Loginueberpruefen.ueberpruefen(login[0]);
