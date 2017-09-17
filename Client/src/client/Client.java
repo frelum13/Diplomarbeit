@@ -28,7 +28,7 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      String write = "login;Lukas,Lukas123";  
+      String write = "login;Fisch,Lukas123";  
         
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);

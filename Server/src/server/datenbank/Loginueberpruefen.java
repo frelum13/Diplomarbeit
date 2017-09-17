@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package server.datenbank;
 
 import java.sql.Driver;
 import java.sql.Connection;
@@ -18,12 +18,15 @@ import java.sql.Statement;
 public class Loginueberpruefen {
     
     
-    static void ueberpruefen(String name) 
+    public static boolean ueberpruefen(String name, String tabelle) 
     {
+        boolean check = false;
+        
         System.out.format("%s\n",name);
-        String name2 = "'" + name + "'";
+        name = "'" + name + "'";
         try
         {
+            String sql;
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Loginüberprüfen: vor dem connecten");
 
@@ -36,19 +39,22 @@ public class Loginueberpruefen {
             Statement st = conn.createStatement();
 
             System.out.println("Statment");
-            String sql = ("SELECT * FROM login WHERE firstname = " + name2);         
-
-            ResultSet myRs = st.executeQuery(sql);
-                
-            if(myRs.next())
-                System.out.println("true");
-            else
-                System.out.println("false");
             
+            if(tabelle == "login")
+                sql = ("SELECT * FROM login WHERE username = " + name);         
+            else
+                sql = ("SELECT * FROM horse WHERE name = " + name);
+            ResultSet myRs = st.executeQuery(sql);
+            
+            check = myRs.next();
         } catch (SQLException | ClassNotFoundException ex)
         {
             ex.printStackTrace();
         }
-
+        finally
+        {
+            System.out.println(check);
+            return check;
+        }
     }
 }

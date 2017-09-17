@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package server.datenbank;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,7 +33,7 @@ public class Connect {
         private void conection()
         {
         
-            try {
+            try {                
                 System.out.println("LoginConnection: Beim Connecten");
                 Properties connectionProps = new Properties();
                 connectionProps.put("user", user);

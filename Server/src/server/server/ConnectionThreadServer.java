@@ -1,5 +1,6 @@
-package server;
+package server.server;
 
+import server.protocol.Protocol;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -30,9 +31,9 @@ public class ConnectionThreadServer implements Runnable
             String msg = r.readLine();
             System.out.format("%s\n", msg);
 
-            Protocol.input(msg);
+            String antwort = Protocol.input(msg);
           
-            w.write("OK");
+            w.write(antwort);
             w.flush();
             
              

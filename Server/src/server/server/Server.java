@@ -1,5 +1,5 @@
 
-package Server;
+package server.server;
 
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public void start() throws IOException
       Socket socket = serverSocket.accept();
       socket.setSoTimeout(0);      
       System.out.println("Verbindung hergstellt: " + socket);
-      new Thread(new server.ConnectionThreadServer(socket)).start();
+      new Thread(new server.server.ConnectionThreadServer(socket)).start();
     }
     
 //            serverSocket.close();
