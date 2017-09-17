@@ -23,11 +23,11 @@ public class Datenbank {
     
     public static void main(String[] args) {
         
-        final String hostname = "localhost";
+        final String hostname = "192.168.0.6";
         final String port = "3306";
-        final String dbname = "demo";
-        final String user = "root";
-        final String password = "Lukas";
+        final String dbname = "horse";
+        final String user = "Lukas";
+        final String password = "Campus02";
         
         
         try {

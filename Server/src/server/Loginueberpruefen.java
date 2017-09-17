@@ -5,11 +5,12 @@
  */
 package server;
 
+import java.sql.Driver;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 /**
  *
  * @author Lukas
@@ -19,28 +20,32 @@ public class Loginueberpruefen {
     
     static void ueberpruefen(String name) 
     {
+        System.out.format("%s\n",name);
+        String name2 = "'" + name + "'";
         try
         {
+            Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Loginüberprüfen: vor dem connecten");
             
-            LoginConection connect = new LoginConection("horse");
-            Connection conn = connect.getConn();
+//            Conection connect = new Conection("horse");
+//            String url = connect.getUrl();
+//            System.out.format("url = %s\n",url);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.0.6:3306/horse?useSSL=false","root","Campus02");
             
             System.out.println("Loginüberprüfen: Mit Datenbank verbunden");
-            
+                
             Statement st = conn.createStatement();
-            String sql = ("SELECT * FROM tabellenName WHERE spaltenName = wert;");
-            
+            System.out.println("Statment");
+            String sql = ("SELECT * FROM login WHERE firstname = " + name2);
+                
             ResultSet myRs = st.executeQuery(sql);
-           
+                
             if(myRs.next())
                 System.out.println("true");
             else
                 System.out.println("false");
             
-            
-            conn.close();
-        } catch (SQLException ex)
+        } catch (SQLException | ClassNotFoundException ex)
         {
             ex.printStackTrace();
         }
