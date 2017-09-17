@@ -26,28 +26,18 @@ public class Loginueberpruefen {
         {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Loginüberprüfen: vor dem connecten");
-            
-<<<<<<< HEAD
-//            Conection connect = new Conection("horse");
-//            String url = connect.getUrl();
-//            System.out.format("url = %s\n",url);
-            Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.0.6:3306/horse?useSSL=false","root","Campus02");
-=======
+
             Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
->>>>>>> 9dcbf0be50d9a850da9145797a265562125d909f
-            
+
+                       
             System.out.println("Loginüberprüfen: Mit Datenbank verbunden");
                 
             Statement st = conn.createStatement();
-<<<<<<< HEAD
+
             System.out.println("Statment");
-            String sql = ("SELECT * FROM login WHERE firstname = " + name2);
-                
-=======
-            String sql = ("SELECT * FROM login WHERE firstname = " + "'" + name + "'");
-            
->>>>>>> 9dcbf0be50d9a850da9145797a265562125d909f
+            String sql = ("SELECT * FROM login WHERE firstname = " + name2);         
+
             ResultSet myRs = st.executeQuery(sql);
                 
             if(myRs.next())
