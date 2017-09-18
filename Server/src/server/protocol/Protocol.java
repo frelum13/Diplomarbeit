@@ -6,6 +6,7 @@
 package server.protocol;
 
 import server.datenbank.Datenbanklesen;
+import server.datenbank.Datenbankloeschen;
 import server.string.Stringsplit;
 import server.datenbank.Loginueberpruefen;
 import server.datenbank.Datenbankschreiben;
@@ -46,13 +47,18 @@ public class Protocol {
                     
                     Datenbankschreiben.schreiben("horses", inserthorse);
                 break;
+                case "updatehorse":
+                case "updatelogin":
                 case "deletehorse":
                     
-                    //new Datenbankloeschen(name).start;
+                    Datenbankloeschen.loeschen("login", str[1]);
                     
-                break;
+                    return "Pferd " + str[1] + " wurde erfolgreich geloescht";
                 case "deleteuser":
-                break;
+                    
+                    Datenbankloeschen.loeschen("horses", str[1]);
+                    
+                    return "User " + str[1] + " wurde erfolgreich geloescht";
                 case "infohorse":
                     
                     info = Datenbanklesen.lesen(str[1], "infohorse");
@@ -69,7 +75,7 @@ public class Protocol {
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
-                    return "";
+                    return "erfolgreich registriert";
                 case "login":
                       Stringsplit splitten = new Stringsplit(str[1], ",");
                       String[] login = splitten.getStr();

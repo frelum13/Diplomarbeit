@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import org.json.simple.JSONObject;
 
 
 /**
@@ -28,7 +29,8 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      String write = "login;Fisch,Lukas123";  
+      JSONObject writee = client.Json_.writee();
+      String write = writee.toString();  
         
       socket.connect(new InetSocketAddress(host, port), 3000);
       socket.setSoTimeout(0);
