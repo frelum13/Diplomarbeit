@@ -21,6 +21,8 @@ public class Protocol {
 
     public static String input(String msg)
     {
+        String info = null;
+        Stringsplit spliten = null;
         Stringsplit split = new Stringsplit(msg, ";");
         
         String[] str = split.getStr();
@@ -31,46 +33,50 @@ public class Protocol {
                 case "get":
                     
                 break;
-                case "send":
-                    
-                    //new Datenbanklesen(name).start;
-                    
-                break;
                 case "water":
                     
                     System.out.format("%s\n",str[1]);
                     
-                    return "Blabla";
+                    return "on";
                 case "stop":
                 break;
-                case "info":
-                break;
                 case "new":
-                    //Datenbankschreiben.schreiben("horse", "");
+                    spliten = new Stringsplit(str[1], ",");
+                    String[] inserthorse = spliten.getStr();
+                    
+                    Datenbankschreiben.schreiben("horses", inserthorse);
                 break;
-                case "delete":
+                case "deletehorse":
                     
                     //new Datenbankloeschen(name).start;
                     
                 break;
-                case "toedit":
-                    
-                    //new Datenbanklesen(name).start;
-                    
+                case "deleteuser":
                 break;
+                case "infohorse":
+                    
+                    info = Datenbanklesen.lesen(str[1], "infohorse");
+                    return info;
+                    
+                case "infouser":
+                    
+                    info = Datenbanklesen.lesen(str[1], "infouser");
+                    return info;
+   
                 case "registrate":
-                    Stringsplit spliten = new Stringsplit(str[1], ",");
+                    spliten = new Stringsplit(str[1], ",");
                     String[] registrate = spliten.getStr();
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
-                break;
+                    return "";
                 case "login":
                       Stringsplit splitten = new Stringsplit(str[1], ",");
                       String[] login = splitten.getStr();
                       
-                      for(int i = 0; i<login.length;i++)
-                          System.out.format("%s\n",login[i]);
+                       for (String login1 : login) {
+                        System.out.format("%s\n", login1);
+                        }
                       
                       boolean abfrage = Loginueberpruefen.ueberpruefen(login[0],"login");
                       if(abfrage = true)

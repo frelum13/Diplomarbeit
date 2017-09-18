@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import server.string.Strinbuild;
 
 /**
  *
@@ -21,7 +22,10 @@ public class Datenbanklesen
     {
         try
         {
+            int i;
             String sql;
+            String[] liste = null;
+            ResultSet myRs;
             Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
             
@@ -31,7 +35,7 @@ public class Datenbanklesen
             {
                 case "Password":
                     sql =  "SELECT * FROM login WHERE username = '" + name + "'";
-                    ResultSet myRs = st.executeQuery(sql);
+                    myRs = st.executeQuery(sql);
                     while (myRs.next()) {
                           
                         System.out.println("Password: " + myRs.getString(5));
@@ -39,8 +43,25 @@ public class Datenbanklesen
                     }
                 break;
                 case "Infouser":
-                break;
+                    sql =  "SELECT * FROM login WHERE username = '" + name + "'";
+                    myRs = st.executeQuery(sql);
+                    while (myRs.next()) {
+                        for(i=1; i<=5; i++)
+                             liste[i-1]=myRs.getString(i);
+                        
+                        
+                        return Strinbuild.stringbuild(liste);
+                    }
                 case "Infohorse":
+                    sql =  "SELECT * FROM horses WHERE name = '" + name + "'";
+                    myRs = st.executeQuery(sql);
+                    while (myRs.next()) {
+                        for(i=1; i<=3; i++)
+                             liste[i-1]=myRs.getString(i);
+                        
+                        
+                        return Strinbuild.stringbuild(liste);
+                    }
                 break;
                     
             }            
