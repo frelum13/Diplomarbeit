@@ -20,13 +20,10 @@ import server.datenbank.Datenbankschreiben;
 public class Protocol {
       
 
-    public static String input(String msg)
+    public static String input(String[] str)
     {
         String info = null;
         Stringsplit spliten = null;
-        Stringsplit split = new Stringsplit(msg, ";");
-        
-        String[] str = split.getStr();
        
         System.out.println("In Input verarbeiten");
             switch(str[0])
@@ -38,12 +35,13 @@ public class Protocol {
                     
                     System.out.format("%s\n",str[1]);
                     
-                    return "on";
+                    return str[1];
                 case "stop":
                 break;
                 case "new":
-                    spliten = new Stringsplit(str[1], ",");
-                    String[] inserthorse = spliten.getStr();
+                    String[] inserthorse = null;
+                    for(int j = 1; j < str.length; j++)
+                        inserthorse[j-1] = str[j]; 
                     
                     Datenbankschreiben.schreiben("horses", inserthorse);
                 break;
@@ -70,15 +68,17 @@ public class Protocol {
                     return info;
    
                 case "registrate":
-                    spliten = new Stringsplit(str[1], ",");
-                    String[] registrate = spliten.getStr();
+                    String[] registrate = null;
+                    for(int z = 0; z < str.length; z++)
+                     registrate[z-1] = str[z];
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
                     return "erfolgreich registriert";
                 case "login":
-                      Stringsplit splitten = new Stringsplit(str[1], ",");
-                      String[] login = splitten.getStr();
+                      String[] login = null;
+                      for(int i=0 ; i < str.length ; i++)
+                       login[i-1] = str[i]; 
                       
                        for (String login1 : login) {
                         System.out.format("%s\n", login1);

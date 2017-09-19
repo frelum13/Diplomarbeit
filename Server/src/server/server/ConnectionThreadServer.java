@@ -9,9 +9,11 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import json.Jsonendcoding;
+import server.json.Jsonendcoding;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class ConnectionThreadServer implements Runnable
 {
@@ -27,23 +29,28 @@ public class ConnectionThreadServer implements Runnable
     public void run() {
     
         try{
-            JSONObject json; 
+            String[] str;
+            String antwort = null;
             System.out.println("Im connection Thread");
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
-            JSONObject obj = new JSONObject(jsonString.toString(r.readLine()));
+                        
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject) parser.parse(r.readLine());
+            
             System.out.format("%s\n", obj);
+            str = Jsonendcoding.decoiding(obj);
+            System.out.println("vor dem Protocol");
+            antwort = Protocol.input(str);
             
-            //String antwort = Protocol.input(msg);
-            Jsonendcoding.decoiding(obj);
-            
-            
-            w.write(/*antwort*/"Hallo");
+            w.write(antwort);
             w.flush();
             
              
         }
         catch (IOException ex) {
+            Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
         }        
         finally
