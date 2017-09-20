@@ -39,7 +39,7 @@ public class Protocol {
                 case "stop":
                 break;
                 case "new":
-                    String[] inserthorse = null;
+                    String[] inserthorse = new String[100];
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
@@ -68,16 +68,16 @@ public class Protocol {
                     return info;
    
                 case "registrate":
-                    String[] registrate = null;
-                    for(int z = 0; z < str.length; z++)
+                    String[] registrate = new String[100];
+                    for(int z = 1; z < str.length; z++)
                      registrate[z-1] = str[z];
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
                     return "erfolgreich registriert";
                 case "login":
-                      String[] login = null;
-                      for(int i=0 ; i < str.length ; i++)
+                      String[] login = new String[100];
+                      for(int i=1 ; i < str.length ; i++)
                        login[i-1] = str[i]; 
                       
                        for (String login1 : login) {

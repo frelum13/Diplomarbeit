@@ -18,8 +18,8 @@ public class Jsonendcoding {
     
    public static String[] decoiding(Object obj)
    {
-       String[] str = null;
-       int i = 0;
+       String[] str = new String[10];
+       int i = 1;
        JSONParser parser = new JSONParser();
        JSONObject jsonObject = (JSONObject) obj;
        
@@ -27,13 +27,15 @@ public class Jsonendcoding {
        System.out.println(jsonObject);
        
        
-       String name = (String) jsonObject.get("anweisung");
-       System.out.println(name);
+       str[0] = (String) jsonObject.get("anweisung");
+       System.out.println(str[1]);
        //loop array
        JSONArray msg = (JSONArray) jsonObject.get("messages");
        Iterator<String> iterator = msg.iterator();
        while (iterator.hasNext()) {
-           str[i]=(iterator.next());
+           String name = null;
+           name = iterator.next();
+           str[i] = name;
            i++;
        }      
        return str;
