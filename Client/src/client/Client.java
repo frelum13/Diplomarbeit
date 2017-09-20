@@ -29,7 +29,7 @@ public class Client
     final Socket socket = new Socket();
     try
     {
-      JSONObject writee = client.Json_.writee();
+      JSONObject writee = client.Json_.write();
       String write = writee.toString();  
         
       socket.connect(new InetSocketAddress(host, port), 3000);

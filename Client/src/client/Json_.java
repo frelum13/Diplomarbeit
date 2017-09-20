@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 
 public class Json_{
 
-    public static JSONObject writee() 
+    public static JSONObject write() 
     {
         JSONObject obj = new JSONObject();
         obj.put("anweisung", "registrate");

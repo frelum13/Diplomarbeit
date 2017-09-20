@@ -6,20 +6,29 @@ package server.json;
  * and open the template in the editor.
  */
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
 public class Jsondecoding {
     
-    public static void main(String[] args){
-      JSONObject obj = new JSONObject();
+        
+    public static JSONObject write(String anweisung, String[] data)
+    {
+        JSONObject obj = new JSONObject();
+        obj.put("anweisung", anweisung);
 
-      obj.put("Anweisung", "Lukas");
-      obj.put("num", new Integer(100));
-      obj.put("balance", new Double(1000.21));
-      obj.put("is_vip", new Boolean(true));
-
-      System.out.print(obj);
-   }
+        JSONArray list = new JSONArray();
+        for(int i = 0; i<data.length ; i++)
+        {
+            System.out.println(data.length);
+            list.add(data[i]);
+        }
+        
+        obj.put("messages", list);
+        
+        System.out.print(obj);
+        return obj;
+    }
     
 }
