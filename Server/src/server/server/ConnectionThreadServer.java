@@ -43,6 +43,8 @@ public class ConnectionThreadServer implements Runnable
             System.out.println("vor dem Protocol");
             antwort = Protocol.input(str);
             
+            
+            
             w.write(antwort);
             w.flush();
             
