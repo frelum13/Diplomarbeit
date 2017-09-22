@@ -62,6 +62,10 @@ public class Client
   
   public static void main (String[] args) throws IOException
   {
+<<<<<<< HEAD
     new Client("109.73.158.173", 1111).start();
+=======
+    new Client("192.168.0.124", 1111).start();
+>>>>>>> 70b8e9afb1389f73cfebcec88ec23f25ee7a2d88
   }
 }

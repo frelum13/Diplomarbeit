@@ -39,7 +39,7 @@ public class Protocol {
                 case "stop":
                 break;
                 case "new":
-                    String[] inserthorse = new String[100];
+                    String[] inserthorse = new String[5];
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
@@ -65,6 +65,7 @@ public class Protocol {
                 case "infouser":
                     
                     info = Datenbanklesen.lesen(str[1], "infouser");
+                    
                     return info;
    
                 case "registrate":
@@ -74,9 +75,9 @@ public class Protocol {
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
-                    return "erfolgreich registriert";
+                    return "Okay";
                 case "login":
-                      String[] login = new String[100];
+                      String[] login = new String[5];
                       for(int i=1 ; i < str.length ; i++)
                        login[i-1] = str[i]; 
                       
@@ -94,6 +95,8 @@ public class Protocol {
                       {
                           return "Error4";
                       }
+                case "test":
+                    return "true";
                 default:
                     System.out.println("Falsche Anweisung");
                     return "Error4";
