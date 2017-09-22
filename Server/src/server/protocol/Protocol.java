@@ -5,11 +5,14 @@
  */
 package server.protocol;
 
+import org.json.simple.JSONObject;
 import server.datenbank.Datenbanklesen;
 import server.datenbank.Datenbankloeschen;
-import server.string.Stringsplit;
+
 import server.datenbank.Loginueberpruefen;
 import server.datenbank.Datenbankschreiben;
+import server.json.Jsondecoding;
+import server.json.Jsondecodingsingle;
 
 
 
@@ -20,11 +23,14 @@ import server.datenbank.Datenbankschreiben;
 public class Protocol {
       
 
-    public static String input(String[] str)
+    public static JSONObject input(String[] str)
     {
         String info = null;
-        Stringsplit spliten = null;
-       
+        Boolean abfrage = false;
+        String bolean = null;
+        String[] get = new String[100];
+        
+        
         System.out.println("In Input verarbeiten");
             switch(str[0])
             {
@@ -35,39 +41,48 @@ public class Protocol {
                     
                     System.out.format("%s\n",str[1]);
                     
-                    return str[1];
+                    
+                    
+                    return Jsondecodingsingle.write("water", str[1]);
                 case "stop":
-                break;
+                    System.out.format("%s\n",str[1]);
+                    
+                    
+                    
+                    return Jsondecodingsingle.write("stop", str[1]);
+            
                 case "new":
                     String[] inserthorse = new String[5];
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
-                    Datenbankschreiben.schreiben("horses", inserthorse);
-                break;
+                    abfrage = Datenbankschreiben.schreiben("horses", inserthorse);
+                                   
+                    return Jsondecodingsingle.write("new", abfrage.toString());
+                    
                 case "updatehorse":
                 case "updatelogin":
                 case "deletehorse":
                     
-                    Datenbankloeschen.loeschen("login", str[1]);
+                    abfrage = Datenbankloeschen.loeschen("login", str[1]);
                     
-                    return "Pferd " + str[1] + " wurde erfolgreich geloescht";
+                    return Jsondecodingsingle.write("deletehorse", abfrage.toString());
                 case "deleteuser":
                     
-                    Datenbankloeschen.loeschen("horses", str[1]);
+                    abfrage = Datenbankloeschen.loeschen("horses", str[1]);
                     
-                    return "User " + str[1] + " wurde erfolgreich geloescht";
+                    return Jsondecodingsingle.write("deleteusr", abfrage.toString());
                 case "infohorse":
                     
-                    info = Datenbanklesen.lesen(str[1], "infohorse");
-                    return info;
+                    get = Datenbanklesen.lesen(str[1], "infohorse");
+                    
+                   return Jsondecoding.write("infohorse", get);
                     
                 case "infouser":
                     
-                    info = Datenbanklesen.lesen(str[1], "infouser");
+                    get = Datenbanklesen.lesen(str[1], "infouser");
                     
-                    return info;
-   
+                    return Jsondecoding.write("infousr", get);
                 case "registrate":
                     String[] registrate = new String[100];
                     for(int z = 1; z < str.length; z++)
@@ -75,9 +90,9 @@ public class Protocol {
                     
                     Datenbankschreiben.schreiben("login", registrate);
                     
-                    return "Okay";
+                    return Jsondecodingsingle.write("registrate", abfrage.toString());
                 case "login":
-                      String[] login = new String[5];
+                      String[] login = new String[100];
                       for(int i=1 ; i < str.length ; i++)
                        login[i-1] = str[i]; 
                       
@@ -85,23 +100,23 @@ public class Protocol {
                         System.out.format("%s\n", login1);
                         }
                       
-                      boolean abfrage = Loginueberpruefen.ueberpruefen(login[0],"login");
+                      abfrage = Loginueberpruefen.ueberpruefen(login[0],"login");
                       if(abfrage = true)
                       {
                          Datenbanklesen.lesen("Password",login[1]);
-                         return "true";
+                         return Jsondecodingsingle.write("login", "true");
                       }
                       else
                       {
-                          return "Error4";
+                          return Jsondecodingsingle.write("login", "false");
                       }
                 case "test":
-                    return "true";
+                    return Jsondecoding.write("water", str);
                 default:
                     System.out.println("Falsche Anweisung");
-                    return "Error4";
+                    return Jsondecodingsingle.write("default", "false");
                 
             }
-        return "Error4";
+        return Jsondecoding.write("water", str);
     }
 }

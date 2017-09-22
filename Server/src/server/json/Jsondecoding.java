@@ -19,7 +19,7 @@ public class Jsondecoding {
         obj.put("anweisung", anweisung);
 
         JSONArray list = new JSONArray();
-        for(int i = 0; i<data.length ; i++)
+        for(int i = 1; i<data.length ; i++)
         {
             System.out.println(data.length);
             list.add(data[i]);

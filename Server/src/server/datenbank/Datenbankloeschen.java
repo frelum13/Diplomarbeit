@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class Datenbankloeschen {
     
-    public static void loeschen(String table, String name)
+    public static boolean loeschen(String table, String name)
     {   
         
         try {
@@ -30,15 +30,19 @@ public class Datenbankloeschen {
                 if(table == "login")
                 {
                     sql ="DELETE FROM login WHERE username = '" + name + "'";
+                    
                 }
                 else
                 {
                     sql = "DELETE FROM horses WHERE name = '" + name + "'";
+                    
                 }
                 myStmt.executeUpdate(sql);
+                return true;
                            
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
     

@@ -17,7 +17,7 @@ public class Datenbankschreiben {
     
     
     
-    public static void schreiben(String table, String[] inhalt)
+    public static boolean schreiben(String table, String[] inhalt)
     {   
         
         try {
@@ -43,7 +43,9 @@ public class Datenbankschreiben {
                            
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
     
 }

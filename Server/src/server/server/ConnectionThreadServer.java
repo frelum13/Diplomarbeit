@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.json.Jsonendcoding;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -30,7 +29,8 @@ public class ConnectionThreadServer implements Runnable
     
         try{
             String[] str;
-            String antwort = null;
+            JSONObject antwort = null;
+            String stringantwort = null;
             System.out.println("Im connection Thread");
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
@@ -43,9 +43,9 @@ public class ConnectionThreadServer implements Runnable
             System.out.println("vor dem Protocol");
             antwort = Protocol.input(str);
             
+            stringantwort = antwort.toJSONString();
             
-            
-            w.write(antwort);
+            w.write(stringantwort);
             w.flush();
             
              
