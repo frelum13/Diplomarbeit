@@ -17,7 +17,7 @@ public class Json_{
         obj.put("anweisung", "infouser");
 
         JSONArray list = new JSONArray();
-        list.add("Stefan");
+        list.add("Stefano");
               
         
         obj.put("messages", list);

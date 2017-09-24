@@ -63,6 +63,6 @@ public class Client
   public static void main (String[] args) throws IOException
   {
 
-    new Client("10.200.114.202", 1111).start();
+    new Client("109.73.158.173", 1111).start();
   }
 }
