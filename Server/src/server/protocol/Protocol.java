@@ -74,15 +74,15 @@ public class Protocol {
                     return Jsondecodingsingle.write("deleteusr", abfrage.toString());
                 case "infohorse":
                     
-                    get = Datenbanklesen.lesen(str[1], "infohorse");
+                    get = Datenbanklesen.lesen("Infohorse", str[1]);
                     
                    return Jsondecoding.write("infohorse", get);
                     
                 case "infouser":
                     
-                    get = Datenbanklesen.lesen(str[1], "infouser");
+                    get = Datenbanklesen.lesen("Infouser", str[1]);
                     
-                    return Jsondecoding.write("infousr", get);
+                    return Jsondecoding.write("infouser", get);
                 case "registrate":
                     String[] registrate = new String[100];
                     for(int z = 1; z < str.length; z++)

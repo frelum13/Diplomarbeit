@@ -23,7 +23,7 @@ public class Datenbanklesen
         {
             int i;
             String sql;
-            String[] liste = new String[100];
+            String[] liste = new String[5];
             ResultSet myRs;
             Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
@@ -67,6 +67,12 @@ public class Datenbanklesen
                         return liste;
                     }
                 break;
+                default: 
+                {
+                    liste[1] = "Error";
+                    return liste;
+                }
+                    
                     
             }            
                       
