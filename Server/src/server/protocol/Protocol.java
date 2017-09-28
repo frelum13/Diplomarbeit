@@ -37,6 +37,10 @@ public class Protocol {
                 case "get":
                     
                 break;
+                case "start":
+                
+                    return Jsondecodingsingle.write("start", "true");
+                break;
                 case "water":
                     
                     System.out.format("%s\n",str[1]);
@@ -114,7 +118,7 @@ public class Protocol {
                     return Jsondecoding.write("water", str);
                 default:
                     System.out.println("Falsche Anweisung");
-                    return Jsondecodingsingle.write("default", "false");
+                    return Jsondecodingsingle.write("default", "err03");
                 
             }
         return Jsondecoding.write("water", str);

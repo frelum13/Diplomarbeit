@@ -1,3 +1,6 @@
 /Server/build/
 /Server/nbproject/private/
 /Server/dist/
+/UDP/UDPServer/nbproject/private/
+/UDP/UDPServer/build/
+/UDP/UDPServer/dist/
