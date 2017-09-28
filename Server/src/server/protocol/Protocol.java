@@ -40,7 +40,6 @@ public class Protocol {
                 case "start":
                 
                     return Jsondecodingsingle.write("start", "true");
-                break;
                 case "water":
                     
                     System.out.format("%s\n",str[1]);
