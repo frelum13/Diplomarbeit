@@ -48,12 +48,11 @@ public class Datenbanklesen
                 break;
                 case "Infouser":
                     sql =  "SELECT * FROM login WHERE username = '" + name + "'";
+                    System.out.println(sql);
                     myRs = st.executeQuery(sql);
                     while (myRs.next()) {
                         for(i=1; i<=5; i++)
                              liste[i-1]=myRs.getString(i);
-                        
-                        
                         return liste;
                     }
                 case "Infohorse":
