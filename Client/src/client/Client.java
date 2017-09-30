@@ -39,7 +39,7 @@ public class Client
       
       StringBuilder sb = new StringBuilder();
       
-      sb.append(write);
+      sb.append("HI"/*write*/);
       sb.append("\n");
       
       w.write(sb.toString());
