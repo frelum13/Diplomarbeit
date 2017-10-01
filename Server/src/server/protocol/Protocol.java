@@ -64,7 +64,11 @@ public class Protocol {
                     return Jsondecodingsingle.write("new", abfrage.toString());
                     
                 case "updatehorse":
+                    
+                    
                 case "updatelogin":
+                    
+                    
                 case "deletehorse":
                     
                     abfrage = Datenbankloeschen.loeschen("login", str[1]);

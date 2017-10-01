@@ -25,9 +25,11 @@ public class ConnectionThreadServer implements Runnable
     
     
     @Override
-    public void run() {
+    public void run()
+    {
     
         try{
+           
             String[] str;
             JSONObject antwort = null;
             String stringantwort = null;
@@ -36,7 +38,13 @@ public class ConnectionThreadServer implements Runnable
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
                         
             JSONParser parser = new JSONParser();
-            JSONObject obj = (JSONObject) parser.parse(r.readLine());
+            JSONObject obj = null;
+            try {
+                obj = (JSONObject) parser.parse(r.readLine());
+            } catch (ParseException ex) {
+                w.write("err02");
+                w.flush();
+            }
             
             System.out.format("%s\n", obj);
             str = Jsonendcoding.decoiding(obj);
@@ -47,20 +55,18 @@ public class ConnectionThreadServer implements Runnable
             
             w.write(stringantwort);
             w.flush();
-            
              
         }
         catch (IOException ex) {
-            Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+            Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, "IOException", ex);
+        } 
+        
         finally
         {
             try {
                 socket.close();
             } catch (IOException ex) {
-                Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, "Socket close IOException", ex);
             }
         }
 
