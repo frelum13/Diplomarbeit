@@ -43,7 +43,7 @@ public class Connect {
 
                 String url = "jdbc:mysql://" + hostname + ":" + port + "/" + dbname + "?useSSL=false";
                 conn = DriverManager.getConnection(url, connectionProps);
-                System.out.println("Nach Connecten");
+                
             }
             catch(SQLException | ClassNotFoundException e)
             {

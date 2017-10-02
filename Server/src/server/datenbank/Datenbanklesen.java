@@ -16,14 +16,28 @@ import java.sql.Statement;
  */
 public class Datenbanklesen
 {
+    private final String read;
+    private final String name;
+    private String[] liste = new String[5];
+    
+
+    public Datenbanklesen(String read, String name) {
+        this.read = read;
+        this.name = name;
+        
+        lesen();
+    }
+
+    public String[] getListe() {
+        return liste;
+    }
   
-    public static String[] lesen(String read, String name)
+    private void lesen()
     {
         try
         {
             int i;
             String sql;
-            String[] liste = new String[5];
             ResultSet myRs;
             Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
@@ -39,10 +53,7 @@ public class Datenbanklesen
                           
                         System.out.println("Password: " + myRs.getString(5));
                         
-                        liste[1] =  myRs.getString(5);
-                        
-                        return liste;
-                                
+                        liste[1] =  myRs.getString(5);                              
                                
                     }
                 break;
@@ -53,7 +64,6 @@ public class Datenbanklesen
                     while (myRs.next()) {
                         for(i=1; i<=5; i++)
                              liste[i-1]=myRs.getString(i);
-                        return liste;
                     }
                 case "Infohorse":
                     sql =  "SELECT * FROM horses WHERE name = '" + name + "'";
@@ -61,29 +71,17 @@ public class Datenbanklesen
                     while (myRs.next()) {
                         for(i=1; i<=3; i++)
                              liste[i-1]=myRs.getString(i);
-                        
-                        
-                        return liste;
                     }
                 break;
                 default: 
                 {
-                    liste[1] = "Error";
-                    return liste;
+                    liste[1] = "Error";   
                 }
-                    
-                    
-            }            
-                      
-            
-            
-            
-            
+            }               
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
-        return null;
     }
 }

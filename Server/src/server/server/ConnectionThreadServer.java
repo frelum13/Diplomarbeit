@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class ConnectionThreadServer implements Runnable
 {
+    private final static Logger log = Logger.getLogger(ConnectionThreadServer.class.getName());
     
     private final Socket socket;
 
@@ -26,29 +27,36 @@ public class ConnectionThreadServer implements Runnable
     
     @Override
     public void run() {
-    
+        
+       
         try{
+            // Variablen deklaration
             String[] str;
             JSONObject antwort = null;
             String stringantwort = null;
-            System.out.println("Im connection Thread");
+            JSONParser parser = new JSONParser();
+            
+            log.info("In Connection Thread");
+            
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
                         
-            JSONParser parser = new JSONParser();
+            // Empfangen 
             JSONObject obj = (JSONObject) parser.parse(r.readLine());
             
-            System.out.format("%s\n", obj);
+            log.info("ConnectionThread:" + obj + "Empfangenes Telegramm");
             str = Jsonendcoding.decoiding(obj);
-            System.out.println("vor dem Protocol");
+            log.info("ConnectionThread: Start des Protokolls");
+            
+            // Aufruf Protokoll
             antwort = Protocol.input(str);
             
+            // Umwandeln von Antwort in String
             stringantwort = antwort.toJSONString();
             
+            //senden
             w.write(stringantwort);
             w.flush();
-            
-             
         }
         catch (IOException ex) {
             Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,6 +71,9 @@ public class ConnectionThreadServer implements Runnable
                 Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        
 
-        }
+    }
+    
 }

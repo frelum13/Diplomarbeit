@@ -26,9 +26,12 @@ public class Protocol {
     public static JSONObject input(String[] str)
     {
         String info = null;
-        Boolean abfrage = false;
+        //Boolean abfrage = false;
+        String getfromloeschen = null;
         String bolean = null;
-        String[] get = new String[100];
+        String[] get = new String[5];
+        
+        Datenbanklesen lesen = null;
         
         
         System.out.println("In Input verarbeiten");
@@ -55,35 +58,38 @@ public class Protocol {
                     return Jsondecodingsingle.write("stop", str[1]);
             
                 case "new":
-                    String[] inserthorse = new String[5];
+                    String[] inserthorse = new String[str.length-1];
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
-                    abfrage = Datenbankschreiben.schreiben("horses", inserthorse);
+                    getfromloeschen = Datenbankschreiben.schreiben("horses", inserthorse);
                                    
-                    return Jsondecodingsingle.write("new", abfrage.toString());
+                    return Jsondecodingsingle.write("new", getfromloeschen);
                     
                 case "updatehorse":
+                                      
                 case "updatelogin":
                 case "deletehorse":
                     
-                    abfrage = Datenbankloeschen.loeschen("login", str[1]);
+                    getfromloeschen = Datenbankloeschen.loeschen("login", str[1]);
                     
-                    return Jsondecodingsingle.write("deletehorse", abfrage.toString());
+                    return Jsondecodingsingle.write("deletehorse", getfromloeschen);
                 case "deleteuser":
                     
-                    abfrage = Datenbankloeschen.loeschen("horses", str[1]);
+                    getfromloeschen = Datenbankloeschen.loeschen("horses", str[1]);
                     
-                    return Jsondecodingsingle.write("deleteusr", abfrage.toString());
+                    return Jsondecodingsingle.write("deleteusr", getfromloeschen);
                 case "infohorse":
                     
-                    get = Datenbanklesen.lesen("Infohorse", str[1]);
+                    lesen = new Datenbanklesen("Infohorse", str[1]);
+                    get = lesen.getListe();
                     
                    return Jsondecoding.write("infohorse", get);
                     
                 case "infouser":
                     
-                    get = Datenbanklesen.lesen("Infouser", str[1]);
+                    lesen = new Datenbanklesen("Infouser", str[1]);
+                    get = lesen.getListe();
                     
                     return Jsondecoding.write("infouser", get);
                 case "registrate":
@@ -113,8 +119,6 @@ public class Protocol {
                       {
                           return Jsondecodingsingle.write("login", "false");
                       }
-                case "test":
-                    return Jsondecoding.write("water", str);
                 default:
                     System.out.println("Falsche Anweisung");
                     return Jsondecodingsingle.write("default", "err03");

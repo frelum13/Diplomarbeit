@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class Datenbankloeschen {
     
-    public static boolean loeschen(String table, String name)
+    public static String loeschen(String table, String name)
     {   
         
         try {
@@ -38,11 +38,11 @@ public class Datenbankloeschen {
                     
                 }
                 myStmt.executeUpdate(sql);
-                return true;
+                return "true";
                            
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return "err02";
         }
     }
     
