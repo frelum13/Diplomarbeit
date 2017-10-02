@@ -26,7 +26,7 @@ public void start() throws IOException
     while (true)
     {
       Socket socket = serverSocket.accept();
-      socket.setSoTimeout(0);      
+      socket.setSoTimeout(100);      
       System.out.println("Verbindung hergstellt: " + socket);
       new Thread(new server.server.ConnectionThreadServer(socket)).start();
     }
