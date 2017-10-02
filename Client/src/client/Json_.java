@@ -14,15 +14,16 @@ public class Json_{
     public static JSONObject write() 
     {
         JSONObject obj = new JSONObject();
-        obj.put("anweisung", "infouser");
+        obj.put("anweisung", "login");
 
         JSONArray list = new JSONArray();
-        list.add("Stefano");
+        list.add("Fisch");
+        list.add("Lukas123");
               
         
         obj.put("messages", list);
         
-        System.out.print(obj);
+        System.out.println(obj);
         return obj;
     }
 

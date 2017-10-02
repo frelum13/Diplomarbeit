@@ -11,6 +11,7 @@ import server.datenbank.Datenbankloeschen;
 
 import server.datenbank.Loginueberpruefen;
 import server.datenbank.Datenbankschreiben;
+import server.datenbank.Datenbankupdate;
 import server.json.Jsondecoding;
 import server.json.Jsondecodingsingle;
 
@@ -28,10 +29,14 @@ public class Protocol {
         String info = null;
         //Boolean abfrage = false;
         String getfromloeschen = null;
+        String antwortwrite = null;
         String bolean = null;
         String[] get = new String[5];
         
         Datenbanklesen lesen = null;
+        Datenbankschreiben schreiben = null;
+        
+        Loginueberpruefen ueberpfruefen = null;
         
         
         System.out.println("In Input verarbeiten");
@@ -52,9 +57,6 @@ public class Protocol {
                     return Jsondecodingsingle.write("water", str[1]);
                 case "stop":
                     System.out.format("%s\n",str[1]);
-                    
-                    
-                    
                     return Jsondecodingsingle.write("stop", str[1]);
             
                 case "new":
@@ -62,17 +64,13 @@ public class Protocol {
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
-                    getfromloeschen = Datenbankschreiben.schreiben("horses", inserthorse);
+                    schreiben = new Datenbankschreiben("horses", inserthorse);
+                    antwortwrite = schreiben.getAbfrage();
                                    
-                    return Jsondecodingsingle.write("new", getfromloeschen);
+                    return Jsondecodingsingle.write("new", antwortwrite);
                     
                 case "updatehorse":
-<<<<<<< HEAD
-                                      
-=======
-                    
-                    
->>>>>>> efe4eef67bc93edc29fb36fa3322695e6caa97c0
+
                 case "updatelogin":
                     
                     
@@ -104,27 +102,41 @@ public class Protocol {
                     for(int z = 1; z < str.length; z++)
                      registrate[z-1] = str[z];
                     
-                    Datenbankschreiben.schreiben("login", registrate);
+                    schreiben = new Datenbankschreiben("login", registrate);
+                    antwortwrite = schreiben.getAbfrage();
                     
-                    return Jsondecodingsingle.write("registrate", abfrage.toString());
+                    return Jsondecodingsingle.write("registrate", antwortwrite);
+                    
                 case "login":
                       String[] login = new String[100];
                       for(int i=1 ; i < str.length ; i++)
-                       login[i-1] = str[i]; 
+                        login[i-1] = str[i]; 
+                       
+                      ueberpfruefen = new Loginueberpruefen(login[0], "login");
+                      antwortwrite = ueberpfruefen.getCheck();
                       
-                       for (String login1 : login) {
-                        System.out.format("%s\n", login1);
-                        }
                       
-                      abfrage = Loginueberpruefen.ueberpruefen(login[0],"login");
-                      if(abfrage = true)
+                      if(antwortwrite == "true")
                       {
-                         Datenbanklesen.lesen("Password",login[1]);
-                         return Jsondecodingsingle.write("login", "true");
+                          lesen = new Datenbanklesen("Password", login[0]);
+                          get = lesen.getListe();
+                                                    
+                          System.out.println(get[1]);
+                          System.out.println(login[1]);
+                          
+                          if(login[1].equals(get[1]))
+                          {
+                              return Jsondecodingsingle.write("login", "true");
+                          }
+                          else
+                          {
+                              return Jsondecodingsingle.write("login", "Falsches Passwort");
+                          }
+                          
                       }
                       else
                       {
-                          return Jsondecodingsingle.write("login", "false");
+                          return Jsondecodingsingle.write("login", "false1");
                       }
                 default:
                     System.out.println("Falsche Anweisung");

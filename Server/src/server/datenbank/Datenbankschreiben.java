@@ -15,9 +15,18 @@ import java.sql.Statement;
  */
 public class Datenbankschreiben {
     
+    private final String table;
+    private final String[] inhalt;
+    private String abfrage;
+
+    public Datenbankschreiben(String table, String[] inhalt) {
+        this.table = table;
+        this.inhalt = inhalt;
+        
+        schreiben();
+    }  
     
-    
-    public static String schreiben(String table, String[] inhalt)
+    private void schreiben()
     {   
         
         try {
@@ -43,9 +52,14 @@ public class Datenbankschreiben {
                            
         } catch (SQLException e) {
             e.printStackTrace();
-            return "err02";
+            abfrage = "err02";
         }
-        return "true";
+        
+        abfrage =  "true";
+    }
+
+    public String getAbfrage() {
+        return abfrage;
     }
     
 }

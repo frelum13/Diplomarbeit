@@ -49,13 +49,12 @@ public class Datenbanklesen
                 case "Password":
                     sql =  "SELECT * FROM login WHERE username = '" + name + "'";
                     myRs = st.executeQuery(sql);
-                    while (myRs.next()) {
-                          
+                    while (myRs.next())
+                    {
                         System.out.println("Password: " + myRs.getString(5));
-                        
-                        liste[1] =  myRs.getString(5);                              
-                               
+                        liste[1] =  myRs.getString(5);                                 
                     }
+                    System.out.println("nope");
                 break;
                 case "Infouser":
                     sql =  "SELECT * FROM login WHERE username = '" + name + "'";

@@ -26,21 +26,15 @@ public class ConnectionThreadServer implements Runnable
     
     
     @Override
-<<<<<<< HEAD
-    public void run() {
-        
-       
-        try{
-            // Variablen deklaration
-=======
     public void run()
     {
     
         try{
            
->>>>>>> efe4eef67bc93edc29fb36fa3322695e6caa97c0
+            // Variablen Deklaration
             String[] str;
             JSONObject antwort = null;
+            JSONObject obj = null;
             String stringantwort = null;
             JSONParser parser = new JSONParser();
             
@@ -48,20 +42,15 @@ public class ConnectionThreadServer implements Runnable
             
             final BufferedReader r = new BufferedReader(new InputStreamReader(socket.getInputStream()));   
             final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));   
-                        
-<<<<<<< HEAD
-            // Empfangen 
-            JSONObject obj = (JSONObject) parser.parse(r.readLine());
-=======
-            JSONParser parser = new JSONParser();
-            JSONObject obj = null;
+                     
             try {
+                 // Empfangen 
                 obj = (JSONObject) parser.parse(r.readLine());
             } catch (ParseException ex) {
                 w.write("err02");
                 w.flush();
             }
->>>>>>> efe4eef67bc93edc29fb36fa3322695e6caa97c0
+
             
             log.info("ConnectionThread:" + obj + "Empfangenes Telegramm");
             str = Jsonendcoding.decoiding(obj);
@@ -76,15 +65,10 @@ public class ConnectionThreadServer implements Runnable
             //senden
             w.write(stringantwort);
             w.flush();
-<<<<<<< HEAD
-=======
-             
->>>>>>> efe4eef67bc93edc29fb36fa3322695e6caa97c0
         }
         catch (IOException ex) {
             Logger.getLogger(ConnectionThreadServer.class.getName()).log(Level.SEVERE, "IOException", ex);
-        } 
-        
+        }         
         finally
         {
             try {

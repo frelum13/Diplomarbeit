@@ -5,9 +5,7 @@
  */
 package server.datenbank;
 
-import java.sql.Driver;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,17 +15,26 @@ import java.sql.Statement;
  */
 public class Loginueberpruefen {
     
+    private final String name;
+    private final String tabelle;
+
+    private String check;
     
-    public static boolean ueberpruefen(String name, String tabelle) 
-    {
-        boolean check = false;
+    public Loginueberpruefen(String name, String tabelle) {
+        this.name = name;
+        this.tabelle = tabelle;
         
-        System.out.format("%s\n",name);
-        name = "'" + name + "'";
+        ueberpruefen();
+    }
+    
+    private void ueberpruefen() 
+    {
+        
         try
         {
             String sql;
-            Class.forName("com.mysql.jdbc.Driver");
+            boolean abfrage = false;
+            
             System.out.println("Loginüberprüfen: vor dem connecten");
 
             Connect connect = new Connect("horse");
@@ -35,26 +42,26 @@ public class Loginueberpruefen {
 
                        
             System.out.println("Loginüberprüfen: Mit Datenbank verbunden");
-                
             Statement st = conn.createStatement();
-
             System.out.println("Statment");
             
             if(tabelle == "login")
-                sql = ("SELECT * FROM login WHERE username = " + name);         
+                sql = ("SELECT * FROM login WHERE username = " + "'" + name + "'");         
             else
-                sql = ("SELECT * FROM horse WHERE name = " + name);
+                sql = ("SELECT * FROM horse WHERE name = " + "'" + name + "'");
             ResultSet myRs = st.executeQuery(sql);
             
-            check = myRs.next();
-        } catch (SQLException | ClassNotFoundException ex)
+            abfrage = myRs.next();
+            
+            check = String.valueOf(abfrage);
+            
+        } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            check = "false";
         }
-        finally
-        {
-            System.out.println(check);
-            return check;
-        }
+    }
+
+    public String getCheck() {
+        return check;
     }
 }
