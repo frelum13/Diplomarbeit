@@ -18,7 +18,8 @@ public class Datenbanklesen
 {
     private final String read;
     private final String name;
-    private String[] liste = new String[5];
+    private String[] liste;
+    Connect connect = new Connect("horse");
     
 
     public Datenbanklesen(String read, String name) {
@@ -39,7 +40,7 @@ public class Datenbanklesen
             int i;
             String sql;
             ResultSet myRs;
-            Connect connect = new Connect("horse");
+            
             Connection conn = connect.getConn();
             
             Statement st = conn.createStatement();
@@ -74,13 +75,13 @@ public class Datenbanklesen
                 break;
                 default: 
                 {
-                    liste[1] = "Error";   
+                    liste[0] = "Error";   
                 }
             }               
         }
-        catch(SQLException e)
+        catch(SQLException | NullPointerException e)
         {
-            e.printStackTrace();
+            liste[0]= connect.getError();
         }
     }
 }

@@ -52,7 +52,7 @@ public class ConnectionThreadServer implements Runnable
             }
 
             
-            log.info("ConnectionThread:" + obj + "Empfangenes Telegramm");
+            log.log(Level.INFO, "ConnectionThread:{0}Empfangenes Telegramm", obj);
             str = Jsonendcoding.decoiding(obj);
             log.info("ConnectionThread: Start des Protokolls");
             

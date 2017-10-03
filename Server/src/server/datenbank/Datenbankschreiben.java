@@ -26,6 +26,8 @@ public class Datenbankschreiben {
         schreiben();
     }  
     
+    Connect connect = new Connect("horse");
+    
     private void schreiben()
     {   
         
@@ -33,7 +35,7 @@ public class Datenbankschreiben {
             
                 String sql;
             
-                Connect connect = new Connect("horse");
+                
                 Connection myCon = connect.getConn();
             
                 System.out.println("Mit Datenbank verbunden");
@@ -50,9 +52,9 @@ public class Datenbankschreiben {
                 }
                 myStmt.executeUpdate(sql);
                            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            abfrage = "err02";
+        } catch (SQLException | NullPointerException e) 
+        {
+            abfrage = connect.getError();
         }
         
         abfrage =  "true";

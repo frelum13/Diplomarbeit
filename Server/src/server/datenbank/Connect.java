@@ -17,16 +17,17 @@ import java.util.Properties;
 public class Connect {
     
     
-        private final String hostname = "109.73.158.173";
+        private final String hostname = "119.73.158.173";
         private final String port = "3306";
         private final String dbname;
         private final String user = "root";
         private final String password = "Campus02";
         private Connection conn;
+        private String error = null;
 
         public Connect(String dbname) {
             this.dbname = dbname;
-            
+  
             conection();
         }
         
@@ -38,16 +39,20 @@ public class Connect {
                 Properties connectionProps = new Properties();
                 connectionProps.put("user", user);
                 connectionProps.put("password", password);
+                DriverManager.setLoginTimeout(1);
+
 
                 Class.forName("com.mysql.jdbc.Driver");
 
                 String url = "jdbc:mysql://" + hostname + ":" + port + "/" + dbname + "?useSSL=false";
+                
                 conn = DriverManager.getConnection(url, connectionProps);
                 
             }
             catch(SQLException | ClassNotFoundException e)
             {
-                e.printStackTrace();
+                error = "err02";
+                System.out.println("err02");
             }
             
             
@@ -56,6 +61,12 @@ public class Connect {
     public Connection getConn() {
         return conn;
     }
+
+    public String getError() {
+        return error;
+    }
+    
+    
         
         
     

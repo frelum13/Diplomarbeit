@@ -15,14 +15,16 @@ import java.sql.Statement;
  */
 public class Datenbankloeschen {
     
+    
+    
     public static String loeschen(String table, String name)
     {   
+        Connect connect = new Connect("horse");
         
         try {
             
                 String sql;
-            
-                Connect connect = new Connect("horse");
+           
                 Connection myCon = connect.getConn();
             
                 System.out.println("Mit Datenbank verbunden");
@@ -40,9 +42,9 @@ public class Datenbankloeschen {
                 myStmt.executeUpdate(sql);
                 return "true";
                            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "err02";
+        } catch (SQLException | NullPointerException e) {
+            
+            return connect.getError();
         }
     }
     

@@ -17,8 +17,10 @@ public class Loginueberpruefen {
     
     private final String name;
     private final String tabelle;
-
+    
     private String check;
+    
+    Connect connect = new Connect("horse");
     
     public Loginueberpruefen(String name, String tabelle) {
         this.name = name;
@@ -35,13 +37,12 @@ public class Loginueberpruefen {
             String sql;
             boolean abfrage = false;
             
-            System.out.println("Loginüberprüfen: vor dem connecten");
+            System.out.println("Loginüberpruefen: vor dem connecten");
 
-            Connect connect = new Connect("horse");
             Connection conn = connect.getConn();
 
                        
-            System.out.println("Loginüberprüfen: Mit Datenbank verbunden");
+            System.out.println("Loginüberpruefen: Mit Datenbank verbunden");
             Statement st = conn.createStatement();
             System.out.println("Statment");
             
@@ -55,9 +56,10 @@ public class Loginueberpruefen {
             
             check = String.valueOf(abfrage);
             
-        } catch (SQLException ex)
+        } catch (SQLException | NullPointerException e)
         {
-            check = "false";
+            check = connect.getError();
+            System.out.println(connect.getError());
         }
     }
 
