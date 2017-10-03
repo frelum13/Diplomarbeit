@@ -17,7 +17,7 @@ import java.util.Properties;
 public class Connect {
     
     
-        private final String hostname = "119.73.158.173";
+        private final String hostname = "109.73.158.173";
         private final String port = "3306";
         private final String dbname;
         private final String user = "root";

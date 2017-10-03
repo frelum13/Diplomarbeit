@@ -57,8 +57,9 @@ public class ConnectionThreadServer implements Runnable
             log.info("ConnectionThread: Start des Protokolls");
             
             // Aufruf Protokoll
-            antwort = Protocol.input(str);
-            
+            Protocol protocol = new Protocol(str);
+            antwort = protocol.getAntwort();
+                       
             // Umwandeln von Antwort in String
             stringantwort = antwort.toJSONString();
             

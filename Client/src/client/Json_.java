@@ -14,12 +14,13 @@ public class Json_{
     public static JSONObject write() 
     {
         JSONObject obj = new JSONObject();
-        obj.put("anweisung", "login");
+        obj.put("anweisung", "updatelogin");
 
         JSONArray list = new JSONArray();
         list.add("Fisch");
-        list.add("Lukas123");
-              
+        list.add("Lulu");
+        list.add("Pilz");
+        list.add("Hi");
         
         obj.put("messages", list);
         

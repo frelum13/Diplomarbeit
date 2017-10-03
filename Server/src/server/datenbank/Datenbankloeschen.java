@@ -15,9 +15,21 @@ import java.sql.Statement;
  */
 public class Datenbankloeschen {
     
+    private final String table;
+    private final String name;
+    
+    private String check;
+
+    public Datenbankloeschen(String table, String name) {
+        this.table = table;
+        this.name = name;
+        
+        loeschen();
+    }
+   
     
     
-    public static String loeschen(String table, String name)
+    private void loeschen()
     {   
         Connect connect = new Connect("horse");
         
@@ -40,12 +52,16 @@ public class Datenbankloeschen {
                     
                 }
                 myStmt.executeUpdate(sql);
-                return "true";
+                check = "true";
                            
         } catch (SQLException | NullPointerException e) {
             
-            return connect.getError();
+            check = connect.getError();
         }
     }
-    
+
+    public String getCheck() {
+        return check;
+    }
+        
 }

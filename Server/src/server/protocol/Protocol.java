@@ -22,102 +22,137 @@ import server.json.Jsondecodingsingle;
  * @author Lukas
  */
 public class Protocol {
-      
+        //String arrays
+        private final String[] str;
+        private String[] get;  
+        private String[] registrate;
+        private String[] login;
+        //Strings
+        private String singleget = null;     
+        //Datenbank
+        private Datenbanklesen lesen = null;
+        private Datenbankschreiben schreiben = null;
+        private Datenbankupdate update = null;
+        private Datenbankloeschen loeschen= null;
+        
+        private Loginueberpruefen ueberpfruefen = null;
+        //Json
+        private JSONObject antwort;
 
-    public static JSONObject input(String[] str)
+    public Protocol(String[] str) {
+        this.str = str;
+        
+        input();
+    }
+
+    public JSONObject getAntwort() {
+        return antwort;
+    }
+         
+    private void input()
     {
-        String info = null;
-        //Boolean abfrage = false;
-        String getfromloeschen = null;
-        String antwortwrite = null;
-        String bolean = null;
-        String[] get = new String[5];
-        
-        Datenbanklesen lesen = null;
-        Datenbankschreiben schreiben = null;
-        
-        Loginueberpruefen ueberpfruefen = null;
-        
         
         System.out.println("In Input verarbeiten");
+        
             switch(str[0])
             {
                 case "get":
                     
                 break;
+                case "status":
+                    antwort = Jsondecodingsingle.write("status", "hier");
+                break;
                 case "start":
-                
-                    return Jsondecodingsingle.write("start", "true");
-                    
+                    antwort = Jsondecodingsingle.write("start", "true");
+                 break;  
                 case "water":
                     
                     System.out.format("%s\n",str[1]);
                     
-                    
-                    
-                    return Jsondecodingsingle.write("water", str[1]);
+                   
+                    antwort = Jsondecodingsingle.write("water", str[1]);
+                    break;
                 case "stop":
                     System.out.format("%s\n",str[1]);
-                    return Jsondecodingsingle.write("stop", str[1]);
-            
+                    antwort = Jsondecodingsingle.write("stop", str[1]);
+                break;
                 case "new":
                     String[] inserthorse = new String[str.length-1];
                     for(int j = 1; j < str.length; j++)
                         inserthorse[j-1] = str[j]; 
                     
                     schreiben = new Datenbankschreiben("horses", inserthorse);
-                    antwortwrite = schreiben.getAbfrage();
+                    singleget = schreiben.getAbfrage();
                                    
-                    return Jsondecodingsingle.write("new", antwortwrite);
-                    
+                    antwort = Jsondecodingsingle.write("new", singleget);
+                 break;   
                 case "updatehorse":
-
+                {
+                    update = new Datenbankupdate("horses", str);
+                    singleget = update.getAbfrage();
+                    
+                    antwort = Jsondecodingsingle.write("updatehorse", singleget);
+                    
+                }
+                break;
                 case "updatelogin":
+                {
+                    update = new Datenbankupdate("login", str);
+                    singleget = update.getAbfrage();
                     
-                    
+                    antwort = Jsondecodingsingle.write("updateuser", singleget);
+                } 
+                break;
                 case "deletehorse":
                     
-                    getfromloeschen = Datenbankloeschen.loeschen("login", str[1]);
+                    loeschen = new Datenbankloeschen("login", str[1]);
+                    singleget = loeschen.getCheck();
                     
-                    return Jsondecodingsingle.write("deletehorse", getfromloeschen);
+                    antwort = Jsondecodingsingle.write("deletehorse", singleget);
+                    break;
                 case "deleteuser":
                     
-                    getfromloeschen = Datenbankloeschen.loeschen("horses", str[1]);
                     
-                    return Jsondecodingsingle.write("deleteusr", getfromloeschen);
+                   loeschen = new Datenbankloeschen("horses", str[1]);
+                   singleget = loeschen.getCheck();
+                    
+                    antwort = Jsondecodingsingle.write("deleteusr", singleget);
+                    break;
                 case "infohorse":
                     
                     lesen = new Datenbanklesen("Infohorse", str[1]);
                     get = lesen.getListe();
                     
-                   return Jsondecoding.write("infohorse", get);
+                   antwort = Jsondecoding.write("infohorse", get);
+                   break;
                     
                 case "infouser":
                     
                     lesen = new Datenbanklesen("Infouser", str[1]);
                     get = lesen.getListe();
                     
-                    return Jsondecoding.write("infouser", get);
+                    antwort = Jsondecoding.write("infouser", get);
+                    break;
                 case "registrate":
-                    String[] registrate = new String[100];
+                    
                     for(int z = 1; z < str.length; z++)
                      registrate[z-1] = str[z];
                     
                     schreiben = new Datenbankschreiben("login", registrate);
-                    antwortwrite = schreiben.getAbfrage();
+                    singleget = schreiben.getAbfrage();
                     
-                    return Jsondecodingsingle.write("registrate", antwortwrite);
-                    
+                    antwort = Jsondecodingsingle.write("registrate", singleget);
+                    break;
                 case "login":
-                      String[] login = new String[100];
+                      
                       for(int i=1 ; i < str.length ; i++)
                         login[i-1] = str[i]; 
                        
                       ueberpfruefen = new Loginueberpruefen(login[0], "login");
-                      antwortwrite = ueberpfruefen.getCheck();
+                      singleget = ueberpfruefen.getCheck();
                       
                       
-                      if(antwortwrite == "true")
+                      if("true".equals(singleget))
                       {
                           lesen = new Datenbanklesen("Password", login[0]);
                           get = lesen.getListe();
@@ -127,23 +162,26 @@ public class Protocol {
                           
                           if(login[1].equals(get[1]))
                           {
-                              return Jsondecodingsingle.write("login", "true");
+                              antwort = Jsondecodingsingle.write("login", "true");
                           }
                           else
                           {
-                              return Jsondecodingsingle.write("login", "Falsches Passwort");
+                              antwort = Jsondecodingsingle.write("login", "Falsches Passwort");
                           }
                           
                       }
                       else
                       {
-                          return Jsondecodingsingle.write("login", "false1");
+                          antwort = Jsondecodingsingle.write("login", "false1");
                       }
+                      break;
                 default:
                     System.out.println("Falsche Anweisung");
-                    return Jsondecodingsingle.write("default", "err03");
+                    antwort = Jsondecodingsingle.write("default", "err03");
                 
             }
-        return Jsondecoding.write("water", str);
+        antwort = Jsondecodingsingle.write("Error", "err02");
     }
+    
+    
 }
