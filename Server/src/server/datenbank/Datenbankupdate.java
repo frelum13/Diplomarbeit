@@ -46,7 +46,7 @@ public class Datenbankupdate {
                 }
                 else
                 {
-                    myStmt = (PreparedStatement) myCon.prepareStatement("update horses set age ='" + inhalt[2] + "' where name='" + inhalt[1] +"'" );
+                    myStmt = (PreparedStatement) myCon.prepareStatement("update horses set richtungsaenderungen ='" + inhalt[3] + "', time ='" + inhalt[2] + "' where name='" + inhalt[1] +"'" );
                 }
                 myStmt.executeUpdate();
                 abfrage =  "true";

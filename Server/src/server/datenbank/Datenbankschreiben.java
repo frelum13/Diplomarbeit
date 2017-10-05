@@ -48,7 +48,7 @@ public class Datenbankschreiben {
                 }
                 else
                 {
-                    sql ="insert into "+ table + "(id,name,age)"+ "values ('5','" + inhalt[0] + "','" + inhalt[1] + "')";
+                    sql ="insert into "+ table + "(id,name,time,richtungsaenderungen)"+ "values ('5','" + inhalt[0] + "','" + inhalt[1] + "','" + inhalt[2] + "')";
                 }
                 myStmt.executeUpdate(sql);
                            
